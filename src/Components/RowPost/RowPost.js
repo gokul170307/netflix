@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import YouTube from 'react-youtube'
 import './RowPost.css'
-import {imageUrl,API_KEY} from '../../constants/constants'
+import {imageUrl} from '../../constants/constants'
 import  axios from '../../axios'
 function RowPost(props) {
   const[movies,setMovies]=useState([])
@@ -13,7 +13,7 @@ function RowPost(props) {
     }).catch(err=>{
       
     })
-  },[])
+  },)
   const opts = {
     height: '390',
     width: '100%',
@@ -24,7 +24,7 @@ function RowPost(props) {
   };
   const handleMovie =(id)=>{
     console.log(id)
-    axios.get(`/movie/${id}/videos?api_key=${API_KEY}&language=en-US`).then(response=>{
+    axios.get(`/movie/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`).then(response=>{
       if(response.data.results.length!==0){
         setUrlId(response.data.results[0])
       }
